@@ -1,12 +1,21 @@
-import './App.css';
+import { ProvideAuth } from "./Context/useAuth";
+import { Routes, Route, Navigate, BrowserRouter } from 'react-router-dom'
+import Login from "./Pages/Login/Login";
+import Home from "./Pages/Home/Home";
+import Private from "./Private/Private";
 
-function App() {
+function App ()
+{
   return (
-    <>
-      <h1>
-        Hi Hello Dear...
-      </h1>
-    </>
+    <BrowserRouter>
+      <ProvideAuth>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='*' element={<Private getAccess={[ 'none' ]} />} />
+        </Routes>
+      </ProvideAuth>
+    </BrowserRouter>
   );
 }
 
